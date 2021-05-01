@@ -16,6 +16,14 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       state.player.velocities.y += state.player.speed
     }
 
+    if (keyIsDown('arrowleft')) {
+      state.player.velocities.x -= state.player.speed
+    }
+
+    if (keyIsDown('arrowright')) {
+      state.player.velocities.x += state.player.speed
+    }
+
     state.player.location.x += state.player.velocities.x
     state.player.location.y += state.player.velocities.y
   }
@@ -54,7 +62,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       const location = getSafeBoxLocation(size)
 
       const box: Box = {
-        velocities: { x: 0, y: 0.2 },
+        velocities: { x: 0, y: 0 },
         location,
         size,
         color: boxType.color,
