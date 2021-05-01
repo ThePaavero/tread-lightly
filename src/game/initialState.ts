@@ -8,8 +8,9 @@ export default {
     velocities: {
       x: 0,
       y: 0,
-      max: 3,
+      max: 0.2,
     },
+    speed: 0.05,
     size: 20,
   },
   boxes: [],

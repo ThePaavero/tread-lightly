@@ -12,7 +12,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       if (state.player.velocities.y > state.player.velocities.max) {
         return
       }
-      state.player.velocities.y--
+      state.player.velocities.y -= state.player.speed
     }
 
     state.player.location.x += state.player.velocities.x
@@ -21,8 +21,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const moveBoxes = () => {
     state.boxes.forEach((box: Box) => {
-      box.location.x = Math.ceil(box.location.x + box.velocities.x)
-      box.location.y = Math.ceil(box.location.y + box.velocities.y)
+      box.location.x += box.velocities.x
+      box.location.x += box.velocities.y
     })
   }
 
