@@ -8,7 +8,7 @@ export default {
     velocities: {
       x: 0,
       y: 0,
-      max: 10,
+      max: 3,
     },
     size: 20,
   },

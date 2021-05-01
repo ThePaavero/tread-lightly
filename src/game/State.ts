@@ -7,6 +7,14 @@ const randomIntFromInterval = (min: number, max: number): number => { // min and
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
   const updatePlayer = (): void => {
+
+    if (keyIsDown('arrowup')) {
+      if (state.player.velocities.y > state.player.velocities.max) {
+        return
+      }
+      state.player.velocities.y--
+    }
+
     state.player.location.x += state.player.velocities.x
     state.player.location.y += state.player.velocities.y
   }
