@@ -7,25 +7,26 @@ const randomIntFromInterval = (min: number, max: number): number => { // min and
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
   const updatePlayer = (): void => {
-
     if (keyIsDown('arrowup')) {
       state.player.velocities.y -= state.player.speed
     }
-
     if (keyIsDown('arrowdown')) {
       state.player.velocities.y += state.player.speed
     }
-
     if (keyIsDown('arrowleft')) {
       state.player.velocities.x -= state.player.speed
     }
-
     if (keyIsDown('arrowright')) {
       state.player.velocities.x += state.player.speed
     }
-
     state.player.location.x += state.player.velocities.x
     state.player.location.y += state.player.velocities.y
+
+    // Bounce off of walls.
+    if (state.player.location.x <= 0) {
+      state.player.location.x = 0
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / 3)
+    }
   }
 
   const moveBoxes = (): void => {
