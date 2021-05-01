@@ -4,9 +4,16 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
     context.clearRect(0, 0, canvas.width, canvas.height)
   }
 
+  const drawBoxes = (): void => {
+    state.boxes.forEach((box: Box) => {
+      context.fillStyle = box.color
+      context.fillRect(box.location.x, box.location.y, box.size, box.size)
+    })
+  }
+
   const draw = (): void => {
     clear()
-    // Your game's rendering logic goes here.
+    drawBoxes()
   }
 
   return { draw }

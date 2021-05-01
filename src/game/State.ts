@@ -37,7 +37,10 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         size,
         color: 'red', // @todo
       }
+      state.boxes.push(box)
     }
+    state.boxAmountMinMax.min += 4
+    state.boxAmountMinMax.max += 4
   }
 
   const init = () => {

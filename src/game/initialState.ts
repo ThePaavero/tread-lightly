@@ -12,4 +12,8 @@ export default {
     },
   },
   boxes: [],
+  boxAmountMinMax: {
+    min: 10,
+    max: 15,
+  },
 }

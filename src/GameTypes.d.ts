@@ -13,6 +13,11 @@ type GameFrameInitialState = {
   keysDown: Array<string>,
 }
 
+type BoxAmountMinMax = {
+  min: number,
+  max: number,
+}
+
 type GameState = {
   timeElapsed: number,
   points: number,
@@ -20,6 +25,7 @@ type GameState = {
   keysDown: Array<string>, // @todo DRY.
   player: any,
   boxes: Array<Box>,
+  boxAmountMinMax: BoxAmountMinMax,
 }
 
 type Velocity = {
