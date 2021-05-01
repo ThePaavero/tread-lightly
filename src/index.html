@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: rgb(56, 56, 56);
+    }
+
+    canvas {
+      max-width: 100%;
+      background-color: black;
+    }
+
+    .debug-pre {
+      background-color: rgba(0, 0, 0, 0.7);
+      display: block;
+      font-family: 'Courier New', Courier, monospace;
+      color: #fff;
+      font-size: 12px;
+      padding: 5px;
+      margin: 5px;
+      min-height: 50px;
+    }
+
+    .debug-pre::before {
+      content: "DEBUG:";
+      display: block;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas></canvas>
+</body>
+
+</html>
