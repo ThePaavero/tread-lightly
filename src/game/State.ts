@@ -1,3 +1,5 @@
+import boxTypes from './boxTypes'
+
 const randomIntFromInterval = (min: number, max: number): number => { // min and max included 
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -27,7 +29,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const generateBoxes = (amount: number) => {
     for (let i = 0; i < amount; i++) {
-      const size = randomIntFromInterval(10, 70)
+      const boxType = randomIntFromInterval(0, 5) === 0 ? boxTypes.good : boxTypes.bad
+      const size = randomIntFromInterval(20, 70)
       const box: Box = {
         velocities: { x: 0, y: 0 },
         location: {
@@ -36,6 +39,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         },
         size,
         color: 'red', // @todo
+        ...boxType,
       }
       state.boxes.push(box)
     }
