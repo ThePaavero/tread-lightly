@@ -36,4 +36,6 @@ type BoxLocation = {
 type Box = {
   velocities: Velocity,
   location: BoxLocation,
+  size: number,
+  color: string,
 }
