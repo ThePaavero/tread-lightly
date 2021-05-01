@@ -10,6 +10,7 @@ export default {
       y: 0,
       max: 10,
     },
+    size: 20,
   },
   boxes: [],
   boxAmountMinMax: {

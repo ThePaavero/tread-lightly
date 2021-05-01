@@ -11,9 +11,15 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
     })
   }
 
+  const drawPlayer = () => {
+    context.fillStyle = '#99aee6'
+    context.fillRect(state.player.location.x, state.player.location.y, state.player.size, state.player.size)
+  }
+
   const draw = (): void => {
     clear()
     drawBoxes()
+    drawPlayer()
   }
 
   return { draw }
