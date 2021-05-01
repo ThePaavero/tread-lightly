@@ -24,7 +24,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.player.location.x += state.player.velocities.x
     state.player.location.y += state.player.velocities.y
 
-    // Bounce off of walls.
+    // Bounce off of walls, ceiling and floor.
+    // X axis.
     if (state.player.location.x <= 0) {
       state.player.location.x = 0
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
@@ -32,6 +33,16 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     else if (state.player.location.x + state.player.size >= canvas.width) {
       state.player.location.x = canvas.width - state.player.size
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+    }
+
+    // Y axis.
+    if (state.player.location.y <= 0) {
+      state.player.location.y = 0
+      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+    }
+    else if (state.player.location.y + state.player.size >= canvas.height) {
+      state.player.location.y = canvas.height - state.player.size
+      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
   }
 
