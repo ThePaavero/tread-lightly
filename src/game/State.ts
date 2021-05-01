@@ -4,6 +4,8 @@ const randomIntFromInterval = (min: number, max: number): number => { // min and
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+const playerBouncinessDivider = 1.3
+
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
   const updatePlayer = (): void => {
@@ -25,7 +27,11 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     // Bounce off of walls.
     if (state.player.location.x <= 0) {
       state.player.location.x = 0
-      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / 3)
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+    }
+    else if (state.player.location.x + state.player.size >= canvas.width) {
+      state.player.location.x = canvas.width - state.player.size
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
   }
 
