@@ -48,7 +48,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         velocities: { x: 0, y: 0 },
         location,
         size,
-        color: 'red', // @todo
+        color: boxType.color,
         type: goodOrBad,
         ...boxType,
       }

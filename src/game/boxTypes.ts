@@ -1,6 +1,6 @@
 export default {
   bad: {
-    color: '#bc0a4d',
+    color: '#c2258b',
     damage: 5,
   },
   good: {
