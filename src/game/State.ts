@@ -39,11 +39,6 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     moveBoxes()
   }
 
-  const update = (): void => {
-    updatePlayer()
-    updateBoxes()
-  }
-
   const getSafeBoxLocation = (size: number): BoxLocation => {
     const buffer = 100
     const x = randomIntFromInterval(10, canvas.width - (size + buffer))
@@ -81,6 +76,27 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   const placePlayer = (): void => {
     state.player.location.x = canvas.width - (state.player.size + 10)
     state.player.location.y = canvas.height - (state.player.size + 10)
+  }
+
+  const objectsOverlap = (a: Box, b: Box): boolean => { // @note We assume "b" will be the player, but it should match type "Box."
+    return (a.location.x < b.location.x + b.size &&
+      a.location.x + a.size > b.location.x &&
+      a.location.y < b.location.y + b.size &&
+      a.location.y + a.size > b.location.y)
+  }
+
+  const doHitChecks = (): void => {
+    state.boxes.forEach((box: Box) => {
+      if (objectsOverlap(box, state.player)) {
+        console.log('CRASH')
+      }
+    })
+  }
+
+  const update = (): void => {
+    updatePlayer()
+    updateBoxes()
+    doHitChecks()
   }
 
   const init = (): void => {
