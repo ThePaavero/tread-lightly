@@ -9,10 +9,11 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   const updatePlayer = (): void => {
 
     if (keyIsDown('arrowup')) {
-      if (state.player.velocities.y > state.player.velocities.max) {
-        return
-      }
       state.player.velocities.y -= state.player.speed
+    }
+
+    if (keyIsDown('arrowdown')) {
+      state.player.velocities.y += state.player.speed
     }
 
     state.player.location.x += state.player.velocities.x
