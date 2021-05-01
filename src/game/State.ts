@@ -9,6 +9,7 @@ const playerBouncinessDivider = 1.3
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
   const updatePlayer = (): void => {
+    // Basic movement logic.
     if (keyIsDown('arrowup')) {
       state.player.velocities.y -= state.player.speed
     }
@@ -21,10 +22,22 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     if (keyIsDown('arrowright')) {
       state.player.velocities.x += state.player.speed
     }
+
+    // Apply velocities.
     state.player.location.x += state.player.velocities.x
     state.player.location.y += state.player.velocities.y
 
     // Bounce off of walls, ceiling and floor.
+    bouncePlayer(canvas, true)
+  }
+
+  const bouncePlayer = (frame: any, useCanvas: boolean = false): void => {
+    const walls = {
+      top: useCanvas ? 0 : frame.location.y,
+      bottom: useCanvas ? canvas.height : frame.location.y + frame.size,
+      left: useCanvas ? 0 : frame.location.x,
+      right: useCanvas ? canvas.width : frame.location.x + frame.size,
+    }
     // X axis.
     if (state.player.location.x <= 0) {
       state.player.location.x = 0
@@ -103,10 +116,15 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       a.location.y + a.size > b.location.y)
   }
 
+  const doOnBoxHit = (box: Box): void => {
+    console.log('HIT!')
+    // @todo Apply a bounce here.
+  }
+
   const doHitChecks = (): void => {
     state.boxes.forEach((box: Box) => {
       if (objectsOverlap(box, state.player)) {
-        console.log('CRASH')
+        doOnBoxHit(box)
       }
     })
   }
