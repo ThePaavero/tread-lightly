@@ -21,8 +21,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const moveBoxes = () => {
     state.boxes.forEach((box: Box) => {
-      box.location.x += box.velocities.x
-      box.location.y += box.velocities.y
+      box.location.x = Math.ceil(box.location.x + box.velocities.x)
+      box.location.y = Math.ceil(box.location.y + box.velocities.y)
     })
   }
 
@@ -53,7 +53,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       const location = getSafeBoxLocation(size)
 
       const box: Box = {
-        velocities: { x: 0, y: 0 },
+        velocities: { x: 0, y: 0.2 },
         location,
         size,
         color: boxType.color,
