@@ -44,4 +44,5 @@ type Box = {
   location: BoxLocation,
   size: number,
   color: string,
+  type: string,
 }

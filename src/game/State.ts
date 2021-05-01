@@ -29,7 +29,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const generateBoxes = (amount: number) => {
     for (let i = 0; i < amount; i++) {
-      const boxType = randomIntFromInterval(0, 5) === 0 ? boxTypes.good : boxTypes.bad
+      const goodOrBad = randomIntFromInterval(0, 5) === 0 ? 'good' : 'bad'
+      const boxType = boxTypes[goodOrBad]
       const size = randomIntFromInterval(20, 70)
       const box: Box = {
         velocities: { x: 0, y: 0 },
@@ -39,6 +40,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         },
         size,
         color: 'red', // @todo
+        type: goodOrBad,
         ...boxType,
       }
       state.boxes.push(box)
@@ -48,7 +50,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const init = () => {
-    generateBoxes(randomIntFromInterval(20, 30))
+    generateBoxes(randomIntFromInterval(50, 80))
   }
 
   init()
