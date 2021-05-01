@@ -28,7 +28,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.player.location.y += state.player.velocities.y
   }
 
-  const moveBoxes = () => {
+  const moveBoxes = (): void => {
     state.boxes.forEach((box: Box) => {
       box.location.x += box.velocities.x
       box.location.x += box.velocities.y
@@ -54,7 +54,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     return { x, y }
   }
 
-  const generateBoxes = (amount: number) => {
+  const generateBoxes = (amount: number): void => {
     for (let i = 0; i < amount; i++) {
       const goodOrBad = randomIntFromInterval(0, 5) === 0 ? 'good' : 'bad'
       const boxType = boxTypes[goodOrBad]
@@ -62,7 +62,10 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       const location = getSafeBoxLocation(size)
 
       const box: Box = {
-        velocities: { x: 0, y: 0 },
+        velocities: {
+          x: 0,
+          y: 0,
+        },
         location,
         size,
         color: boxType.color,
@@ -75,12 +78,12 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.boxAmountMinMax.max += 4
   }
 
-  const placePlayer = () => {
+  const placePlayer = (): void => {
     state.player.location.x = canvas.width - (state.player.size + 10)
     state.player.location.y = canvas.height - (state.player.size + 10)
   }
 
-  const init = () => {
+  const init = (): void => {
     placePlayer()
     generateBoxes(randomIntFromInterval(50, 80))
   }
