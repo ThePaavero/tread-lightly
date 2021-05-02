@@ -61,6 +61,8 @@ type Box = {
   size: number,
   color: string,
   type: string,
+  points?: number,
+  damage?: number,
 }
 
 type Arm = {

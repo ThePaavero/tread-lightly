@@ -158,7 +158,6 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       const boxType = boxTypes[goodOrBad]
       const size = randomIntFromInterval(20, 70)
       const location = getSafeBoxLocation(size)
-
       const box: Box = {
         velocities: {
           x: 0,
@@ -170,6 +169,12 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         type: goodOrBad,
         ...boxType,
       }
+
+      if (goodOrBad === 'bad') {
+        // Randomize damage.
+        box.damage = randomIntFromInterval(1, 5)
+      }
+
       state.boxes.push(box)
     }
     state.boxAmountMinMax.min += 4
@@ -225,6 +230,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
           x = x + arm.juttingAmount
           break
       }
+
       const tipOfArm = {
         location: {
           x,
@@ -232,17 +238,26 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         },
         size: state.player.arm.size,
       }
-      logOnce(tipOfArm, 'tip')
+
       state.boxes.forEach((box: Box) => {
         if (objectsOverlap(box, tipOfArm)) {
           if (box.type === 'good') {
             removeBoxFromArray(box)
           } else {
-            // @todo Punish? Reward? TBD.
+            // Punish player by shortening his arm.
+            arm.juttingAmount = 0
+            arm.maxJuttingAmount -= box.damage
+            if (arm.maxJuttingAmount < 2) {
+              gameOver('Arm destroyed')
+            }
           }
         }
       })
     }
+  }
+
+  const gameOver = (message: string) => {
+    window.alert(`GAME OVER\n(${message})`)
   }
 
   const update = (): void => {

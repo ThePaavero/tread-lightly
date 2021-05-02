@@ -9,7 +9,7 @@ const GetInitialGameState = () => {
     okToJut: true,
     currentlyJutting: false,
     juttingAmount: 0,
-    maxJuttingAmount: 15,
+    maxJuttingAmount: 30,
     direction: null,
     speed: 1,
     location: {
