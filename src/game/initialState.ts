@@ -1,4 +1,4 @@
-const Player = () => {
+const GetInitialGameState = () => {
 
   const location: BoxLocation = {
     x: 0,
@@ -42,7 +42,6 @@ const Player = () => {
     boxes,
     boxAmountMinMax,
   }
-
 }
 
-export default Player()
+export default GetInitialGameState()

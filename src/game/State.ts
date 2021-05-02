@@ -9,7 +9,7 @@ const loggedLabels: Array<string> = []
 
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
-  const updatePlayer = (): void => {
+  const handlePlayerMovement = (): void => {
     // Basic movement logic.
     if (keyIsDown('arrowup')) {
       state.player.velocities.y -= state.player.speed
@@ -30,6 +30,34 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
     // Bounce off of walls, ceiling and floor.
     bouncePlayer(canvas, true)
+  }
+
+  const handleArm = (): void => {
+    const arm = state.player.arm
+
+    // Some early returns.
+    if (arm.animating || !arm.okToJut) {
+      return
+    }
+
+    if (arm.animating) {
+      // @todo Animate shit.
+      return
+    }
+
+    let someKeyIsDown = false
+    'wasd'.split('').forEach((key: string) => {
+      if (!keyIsDown(key) || someKeyIsDown) {
+        return
+      }
+      someKeyIsDown = true
+      console.log(key)
+    })
+  }
+
+  const updatePlayer = (): void => {
+    handlePlayerMovement()
+    handleArm()
   }
 
   const logOnce = (toLog: any, label: string): void => {
