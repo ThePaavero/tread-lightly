@@ -10,8 +10,6 @@ const GetInitialGameState = () => {
     juttingAmount: 0,
     maxJuttingAmount: 15,
     direction: null,
-    animating: false,
-    animatingInOrOut: '',
   }
 
   const boxes: Array<Box> = []
