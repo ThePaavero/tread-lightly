@@ -11,7 +11,7 @@ export default {
       max: 0.2,
     },
     speed: 0.05,
-    size: 20,
+    size: 40,
   },
   boxes: [],
   boxAmountMinMax: {
