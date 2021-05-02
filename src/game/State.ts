@@ -91,7 +91,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
           break
         case 'LEFT':
           arm.location.y = player.location.y + (player.size / 2)
-          arm.location.x = (player.location.x - arm.size) - arm.juttingAmount
+          arm.location.x = player.location.x - arm.juttingAmount
           break
         case 'RIGHT':
           arm.location.y = (player.location.y + (player.size / 2)) - arm.size / 2
