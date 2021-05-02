@@ -55,7 +55,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         state.player.location.y = 0
         state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
       }
-      else if (state.player.location.x + state.player.size >= canvas.height) {
+      else if (state.player.location.y + state.player.size >= canvas.height) {
         state.player.location.y = canvas.height - state.player.size
         state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
       }
