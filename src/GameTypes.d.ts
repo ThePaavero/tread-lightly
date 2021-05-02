@@ -46,3 +46,12 @@ type Box = {
   color: string,
   type: string,
 }
+
+type Arm = {
+  okToJut: boolean,
+  juttingAmount: number,
+  maxJuttingAmount: number,
+  direction: string | null,
+  animating: boolean,
+  animatingInOrOut: string | null,
+}
