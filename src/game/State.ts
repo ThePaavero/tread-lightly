@@ -257,6 +257,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const gameOver = (message: string) => {
+    state.running = false
     window.alert(`GAME OVER\n(${message})`)
   }
 

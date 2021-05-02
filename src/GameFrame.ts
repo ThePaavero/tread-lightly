@@ -33,11 +33,14 @@ const GameFrame = (canvas: HTMLCanvasElement, width: number, height: number, deb
     if (debugMode) {
       basicDebugger.statsBegin()
     }
-    stateUpdater.update()
-    renderer.draw()
-    if (debugMode) {
-      basicDebugger.tick(5)
-      basicDebugger.statsEnd()
+    if (state.running) {
+      stateUpdater.update()
+      renderer.draw()
+
+      if (debugMode) {
+        basicDebugger.tick(5)
+        basicDebugger.statsEnd()
+      }
     }
     window.requestAnimationFrame(tick)
   }
