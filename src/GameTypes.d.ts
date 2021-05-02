@@ -55,3 +55,8 @@ type Arm = {
   animating: boolean,
   animatingInOrOut: string | null,
 }
+
+type MinMaxRange = {
+  min: number,
+  max: number,
+}
