@@ -50,11 +50,20 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     }
 
     const keys = 'wasd'.split('')
+
+    if (keys.filter((key: string) => state.keysDown.includes(key)).length < 1) {
+      state.player.arm.juttingAmount = 0
+    }
+
     keys.forEach((key: string) => {
       if (!keyIsDown(key) || anotherArmControlKeyIsDown(keys, key)) {
         return
       }
-      console.log(key)
+
+      if (state.player.arm.juttingAmount <= state.player.arm.maxJuttingAmount) {
+        state.player.arm.juttingAmount += 0.5
+      }
+
     })
   }
 
