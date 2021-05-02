@@ -28,6 +28,16 @@ type GameState = {
   boxAmountMinMax: BoxAmountMinMax,
 }
 
+type Player = {
+  name: string,
+  location: BoxLocation,
+  velocities: Velocity,
+  speed: number,
+  size: number,
+  minSize: number,
+  arm: Arm,
+}
+
 type Velocity = {
   x: number,
   y: number,

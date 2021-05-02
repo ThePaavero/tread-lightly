@@ -27,16 +27,18 @@ const Player = () => {
     max: 15,
   }
 
+  const player = {
+    name: 'Player 1',
+    location,
+    velocities,
+    speed: 0.05,
+    size: 40,
+    minSize: 20,
+    arm,
+  }
+
   return {
-    player: {
-      name: 'Player 1',
-      location,
-      velocities,
-      speed: 0.05,
-      size: 40,
-      minSize: 20,
-      arm,
-    },
+    player,
     boxes,
     boxAmountMinMax,
   }
