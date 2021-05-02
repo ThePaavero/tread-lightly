@@ -2,7 +2,7 @@
   "author": "ThePaavero",
   "bundleDependencies": false,
   "deprecated": false,
-  "description": "Personal game/canvas art boilerplate with TypeScript support.",
+  "description": "Tread lightly!",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.0",
     "cross-env": "^5.0.1",
