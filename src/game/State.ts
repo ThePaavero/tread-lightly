@@ -67,10 +67,6 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         return
       }
 
-      // if (anotherArmControlKeyIsDown(keys, key)) {
-        // arm.juttingAmount = 0
-      // }
-
       const keyToDirectionMap: any = {
         'w': 'UP',
         's': 'DOWN',
@@ -201,13 +197,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   const doOnBoxHit = (box: Box): void => {
     destroyBox(box)
     const boxClone: any = { ...box }
-    if (boxClone.type === 'bad') {
-      state.player.size += boxClone.damage
-      return
-    }
-    if (state.player.size > state.player.minSize) {
-      state.player.size -= boxClone.points
-    }
+    const prop = box.type === 'bad' ? 'damage' : 'points'
+    state.player.size += boxClone[prop]
   }
 
   const doHitChecks = (): void => {
