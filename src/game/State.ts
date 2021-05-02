@@ -237,6 +237,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         if (objectsOverlap(box, tipOfArm)) {
           if (box.type === 'good') {
             removeBoxFromArray(box)
+          } else {
+            // @todo Punish? Reward? TBD.
           }
         }
       })
