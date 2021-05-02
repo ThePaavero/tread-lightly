@@ -5,6 +5,6 @@ export default {
   },
   good: {
     color: '#8ecd69',
-    points: 1,
+    points: 2,
   }
 }

@@ -164,6 +164,10 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     const boxClone: any = { ...box }
     if (boxClone.type === 'bad') {
       state.player.size += boxClone.damage
+      return
+    }
+    if (state.player.size > state.player.minSize) {
+      state.player.size -= boxClone.points
     }
   }
 
