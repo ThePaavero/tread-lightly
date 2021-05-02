@@ -208,7 +208,10 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     destroyBox(box)
     const boxClone: any = { ...box }
     const prop = box.type === 'bad' ? 'damage' : 'points'
-    state.player.size += boxClone[prop]
+    state.player.size += boxClone[prop] * 20
+    if (state.player.size > 150) {
+      gameOver('You got too big')
+    }
   }
 
   const doHitChecks = (): void => {
