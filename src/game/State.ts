@@ -5,6 +5,7 @@ const randomIntFromInterval = (min: number, max: number): number => { // min and
 }
 
 const playerBouncinessDivider = 1.3
+const loggedLabels: Array<string> = []
 
 const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement) => {
 
@@ -31,6 +32,14 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     bouncePlayer(canvas, true)
   }
 
+  const logOnce = (toLog: any, label: string) => {
+    if (loggedLabels.includes(label)) {
+      return
+    }
+    console.log(toLog)
+    loggedLabels.push(label)
+  }
+
   const bouncePlayer = (frame: any, useCanvas: boolean = false): void => {
     const walls = {
       top: useCanvas ? 0 : frame.location.y,
@@ -38,23 +47,26 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       left: useCanvas ? 0 : frame.location.x,
       right: useCanvas ? canvas.width : frame.location.x + frame.size,
     }
+
+    logOnce(walls, 'walls')
+
     // X axis.
-    if (state.player.location.x <= 0) {
+    if (state.player.location.x <= walls.left) {
       state.player.location.x = 0
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
-    else if (state.player.location.x + state.player.size >= canvas.width) {
-      state.player.location.x = canvas.width - state.player.size
+    else if (state.player.location.x + state.player.size >= walls.right) {
+      state.player.location.x = frame.width - state.player.size
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
 
     // Y axis.
-    if (state.player.location.y <= 0) {
+    if (state.player.location.y <= walls.bottom) {
       state.player.location.y = 0
       state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
-    else if (state.player.location.y + state.player.size >= canvas.height) {
-      state.player.location.y = canvas.height - state.player.size
+    else if (state.player.location.y + state.player.size >= walls.top) {
+      state.player.location.y = walls.top - state.player.size
       state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
   }
@@ -118,7 +130,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const doOnBoxHit = (box: Box): void => {
     console.log('HIT!')
-    // @todo Apply a bounce here.
+    bouncePlayer(box, false)
   }
 
   const doHitChecks = (): void => {
