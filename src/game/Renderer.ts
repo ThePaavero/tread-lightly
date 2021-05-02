@@ -24,7 +24,6 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
     }
     // context.fillStyle = '#99aee6'
     context.fillStyle = 'yellow'
-    let length = 0
     let axis: string = 'x'
     if (['UP', 'DOWN'].filter((dir: string) => state.player.arm.direction === dir).length) {
       axis = 'y'

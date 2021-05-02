@@ -49,6 +49,12 @@ type BoxLocation = {
   y: number,
 }
 
+type OverlapCheckable = {
+  x: number,
+  y: number,
+  size: number,
+}
+
 type Box = {
   velocities: Velocity,
   location: BoxLocation,
@@ -64,6 +70,7 @@ type Arm = {
   direction: string | null,
   location: BoxLocation,
   size: number,
+  speed: number,
   currentlyJutting: boolean,
 }
 

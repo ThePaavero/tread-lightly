@@ -37,8 +37,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const handleArm = (): void => {
-    const player = state.player
-    const arm = player.arm
+    const player: Player = state.player
+    const arm: Arm = player.arm
 
     // Some early returns.
     if (!arm.okToJut) {
@@ -59,7 +59,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     arm.currentlyJutting = arm.juttingAmount > 0
 
     if (arm.juttingAmount <= arm.maxJuttingAmount) {
-      arm.juttingAmount += 0.5
+      arm.juttingAmount += arm.speed
     }
 
     keys.forEach((key: string) => {
@@ -181,8 +181,9 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.player.location.y = canvas.height - (state.player.size + 10)
   }
 
-  const objectsOverlap = (a: Box, b: Box): boolean => {
+  const objectsOverlap = (a: any, b: any): boolean => {
     // @note We assume "b" will be the player, but it should match type "Box" for our purposes here.
+    // @todo ^ Ended up using "any"... Sorry. Refactor (combine types?).
     return (a.location.x < b.location.x + b.size &&
       a.location.x + a.size > b.location.x &&
       a.location.y < b.location.y + b.size &&
@@ -202,16 +203,38 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const doHitChecks = (): void => {
-    let hit = false
-    setTimeout(() => {
-      hit = false
-    }, 30)
     state.boxes.forEach((box: Box) => {
-      if (objectsOverlap(box, state.player) && !hit) {
+      if (objectsOverlap(box, state.player)) {
         doOnBoxHit(box)
-        hit = true
       }
     })
+
+    if (state.player.arm.currentlyJutting) {
+      const arm = state.player.arm
+      let x = arm.location.x
+      let y = arm.location.y
+      switch (arm.direction) {
+        case 'DOWN':
+          y = y + arm.juttingAmount
+          break
+        case 'RIGHT':
+          x = x + arm.juttingAmount
+          break
+      }
+      const tipOfArm = {
+        location: {
+          x,
+          y,
+        },
+        size: state.player.arm.size,
+      }
+      logOnce(tipOfArm, 'tip')
+      state.boxes.forEach((box: Box) => {
+        if (objectsOverlap(box, tipOfArm)) {
+          console.log('ARM HIT')
+        }
+      })
+    }
   }
 
   const update = (): void => {
