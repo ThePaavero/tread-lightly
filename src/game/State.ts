@@ -48,9 +48,27 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       }
       else if (state.player.location.x + state.player.size >= canvas.width) {
         state.player.location.x = canvas.width - state.player.size
-        state.player.velocities.x = (state.player.velocities.x *-1) + (state.player.velocities.x / playerBouncinessDivider)
+        state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+      }
+
+      if (state.player.location.y <= 0) {
+        state.player.location.y = 0
+        state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+      }
+      else if (state.player.location.x + state.player.size >= canvas.height) {
+        state.player.location.y = canvas.height - state.player.size
+        state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
       }
       return
+    }
+
+    if (state.player.location.x <= frame.location.x + frame.size) {
+      state.player.location.x = frame.location.x + frame.size
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+    }
+    else if (state.player.location.x + state.player.size >= canvas.width) {
+      state.player.location.x = canvas.width - state.player.size
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
   }
 
