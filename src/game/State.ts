@@ -60,13 +60,14 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
     // Y axis.
     if (state.player.location.y <= walls.bottom) {
-      state.player.location.y = useCanvas ? 0 : walls.bottom
-      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+      console.log('HIT FROM BOTTOM UP')
+      // state.player.location.y = useCanvas ? 0 : walls.bottom
+      // state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
-    else if (state.player.location.x + state.player.size >= walls.top) {
-      state.player.location.x = useCanvas ? canvas.height - state.player.size : walls.top
-      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
-    }
+    // else if (state.player.location.x + state.player.size >= walls.top) {
+    //   state.player.location.x = useCanvas ? canvas.height - state.player.size : walls.top
+    //   state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+    // }
   }
 
   const moveBoxes = (): void => {
