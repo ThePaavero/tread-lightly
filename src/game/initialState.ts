@@ -27,7 +27,7 @@ const Player = () => {
     max: 15,
   }
 
-  const player = {
+  const player: Player = {
     name: 'Player 1',
     location,
     velocities,
