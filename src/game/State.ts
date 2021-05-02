@@ -58,7 +58,13 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
     if (keys.filter((key: string) => state.keysDown.includes(key)).length < 1) {
       arm.juttingAmount = 0
-      // arm.direction = null
+      arm.direction = null
+    }
+
+    arm.currentlyJutting = arm.juttingAmount > 0
+
+    if (arm.juttingAmount <= arm.maxJuttingAmount) {
+      arm.juttingAmount += 0.5
     }
 
     keys.forEach((key: string) => {
@@ -68,12 +74,6 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
       if (anotherArmControlKeyIsDown(keys, key)) {
         // arm.juttingAmount = 0
-      }
-
-      arm.currentlyJutting = arm.juttingAmount > 0
-
-      if (arm.juttingAmount <= arm.maxJuttingAmount) {
-        arm.juttingAmount += 0.5
       }
 
       const keyToDirectionMap: any = {
