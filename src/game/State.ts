@@ -32,7 +32,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     bouncePlayer(canvas, true)
   }
 
-  const logOnce = (toLog: any, label: string) => {
+  const logOnce = (toLog: any, label: string): void => {
     if (loggedLabels.includes(label)) {
       return
     }
@@ -48,25 +48,23 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       right: useCanvas ? canvas.width : frame.location.x + frame.size,
     }
 
-    logOnce(walls, 'walls')
-
     // X axis.
     if (state.player.location.x <= walls.left) {
-      state.player.location.x = 0
+      state.player.location.x = useCanvas ? 0 : walls.left
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
     else if (state.player.location.x + state.player.size >= walls.right) {
-      state.player.location.x = frame.width - state.player.size
+      // state.player.location.x = frame.width - state.player.size
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
 
     // Y axis.
     if (state.player.location.y <= walls.bottom) {
-      state.player.location.y = 0
+      // state.player.location.y = 0
       state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
     else if (state.player.location.y + state.player.size >= walls.top) {
-      state.player.location.y = walls.top - state.player.size
+      // state.player.location.y = walls.top - state.player.size
       state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
   }
