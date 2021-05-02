@@ -82,15 +82,19 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
       switch (arm.direction) {
         case 'UP':
+          arm.location.y = (player.location.y - arm.size) + arm.juttingAmount
+          arm.location.x = (player.location.x + (player.size / 2)) - arm.size / 2
           break
         case 'DOWN':
           arm.location.y = player.location.y + player.size
-          arm.location.x = player.location.x + (player.size / 2)
+          arm.location.x = (player.location.x + (player.size / 2)) - arm.size / 2
           break
         case 'LEFT':
+          arm.location.y = player.location.y + (player.size / 2)
+          arm.location.x = (player.location.x - arm.size) - arm.juttingAmount
           break
         case 'RIGHT':
-          arm.location.y = player.location.y + (player.size / 2)
+          arm.location.y = (player.location.y + (player.size / 2)) - arm.size / 2
           arm.location.x = player.location.x + player.size
           break
       }
