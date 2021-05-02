@@ -130,14 +130,18 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const doOnBoxHit = (box: Box): void => {
-    console.log('HIT!')
-    // bouncePlayer(box, false)
+    bouncePlayer(box, false)
   }
 
   const doHitChecks = (): void => {
+    let hit = false
+    setTimeout(() => {
+      hit = false
+    }, 30)
     state.boxes.forEach((box: Box) => {
-      if (objectsOverlap(box, state.player)) {
+      if (objectsOverlap(box, state.player) && !hit) {
         doOnBoxHit(box)
+        hit = true
       }
     })
   }
