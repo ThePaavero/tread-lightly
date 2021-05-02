@@ -41,12 +41,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     const arm = player.arm
 
     // Some early returns.
-    if (arm.animating || !arm.okToJut) {
-      return
-    }
-
-    if (arm.animating) {
-      // @todo Animate shit.
+    if (!arm.okToJut) {
       return
     }
 
