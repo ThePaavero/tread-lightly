@@ -32,8 +32,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     bouncePlayer(canvas, true)
   }
 
-  const anotherArmControlKeyIsDown = (keys: Array<string>, okKey: string) => {
-    return keys.filter((key: string) => key !== okKey).map((key: string) => state.keysDown.includes(key)).length
+  const anotherArmControlKeyIsDown = (keys: Array<string>, okKey: string): boolean => {
+    return keys.filter((key: string) => key !== okKey).filter((key: string) => state.keysDown.includes(key)).length > 0
   }
 
   const handleArm = (): void => {
