@@ -37,7 +37,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const handleArm = (): void => {
-    const arm = state.player.arm
+    const player = state.player
+    const arm = player.arm
 
     // Some early returns.
     if (arm.animating || !arm.okToJut) {
@@ -49,20 +50,30 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       return
     }
 
+    // Default location.
+    arm.location.y = player.location.y + (player.size / 2)
+    arm.location.x = player.location.x + (player.size / 2)
+
     const keys = 'wasd'.split('')
 
     if (keys.filter((key: string) => state.keysDown.includes(key)).length < 1) {
-      state.player.arm.juttingAmount = 0
-      state.player.arm.direction = null
+      arm.juttingAmount = 0
+      // arm.direction = null
     }
 
     keys.forEach((key: string) => {
-      if (!keyIsDown(key) || anotherArmControlKeyIsDown(keys, key)) {
+      if (!keyIsDown(key)) {
         return
       }
 
-      if (state.player.arm.juttingAmount <= state.player.arm.maxJuttingAmount) {
-        state.player.arm.juttingAmount += 0.5
+      if (anotherArmControlKeyIsDown(keys, key)) {
+        // arm.juttingAmount = 0
+      }
+
+      arm.currentlyJutting = arm.juttingAmount > 0
+
+      if (arm.juttingAmount <= arm.maxJuttingAmount) {
+        arm.juttingAmount += 0.5
       }
 
       const keyToDirectionMap: any = {
@@ -72,7 +83,33 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         'd': 'RIGHT',
       }
 
-      state.player.arm.direction = keyToDirectionMap[key]
+      arm.direction = keyToDirectionMap[key]
+
+      switch (arm.direction) {
+        case 'UP':
+          break
+        case 'DOWN':
+          arm.location.y = player.location.y + player.size
+          arm.location.x = player.location.x + (player.size / 2)
+          break
+        case 'LEFT':
+          break
+        case 'RIGHT':
+          arm.location.y = player.location.y + (player.size / 2)
+          arm.location.x = player.location.x + player.size
+          break
+      }
+
+      switch (arm.direction) {
+        case 'UP':
+          break
+        case 'DOWN':
+          break
+        case 'LEFT':
+          break
+        case 'RIGHT':
+          break
+      }
     })
   }
 

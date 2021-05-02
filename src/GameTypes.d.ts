@@ -62,6 +62,9 @@ type Arm = {
   juttingAmount: number,
   maxJuttingAmount: number,
   direction: string | null,
+  location: BoxLocation,
+  size: number,
+  currentlyJutting: boolean,
 }
 
 type MinMaxRange = {

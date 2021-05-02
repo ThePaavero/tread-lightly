@@ -14,6 +14,18 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
   const drawPlayer = (): void => {
     context.fillStyle = '#99aee6'
     context.fillRect(state.player.location.x, state.player.location.y, state.player.size, state.player.size)
+
+    drawArm()
+  }
+
+  const drawArm = (): void => {
+    // if (!state.player.arm.currentlyJutting) {
+      // Don't bother.
+      // return
+    // }
+    // context.fillStyle = '#99aee6'
+    context.fillStyle = 'yellow'
+    context.fillRect(state.player.arm.location.x, state.player.arm.location.y, state.player.arm.size, state.player.arm.size)
   }
 
   const draw = (): void => {

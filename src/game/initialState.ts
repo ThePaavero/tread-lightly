@@ -7,9 +7,15 @@ const GetInitialGameState = () => {
 
   const arm: Arm = {
     okToJut: true,
+    currentlyJutting: false,
     juttingAmount: 0,
     maxJuttingAmount: 15,
     direction: null,
+    location: {
+      x: 0,
+      y: 0,
+    },
+    size: 5,
   }
 
   const boxes: Array<Box> = []
