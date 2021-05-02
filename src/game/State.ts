@@ -59,8 +59,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     }
 
     // Y axis.
-    if (state.player.location.y <= walls.bottom) {
-      console.log('HIT FROM BOTTOM UP')
+    if (state.player.location.y >= walls.top) {
+      console.log('HIT FROM ABOVE')
       // state.player.location.y = useCanvas ? 0 : walls.bottom
       // state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
