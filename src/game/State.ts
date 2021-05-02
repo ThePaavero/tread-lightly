@@ -54,18 +54,18 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
     else if (state.player.location.x + state.player.size >= walls.right) {
-      // state.player.location.x = frame.width - state.player.size
+      state.player.location.x = useCanvas ? canvas.width - state.player.size : walls.right
       state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
 
     // Y axis.
     if (state.player.location.y <= walls.bottom) {
-      // state.player.location.y = 0
+      state.player.location.y = useCanvas ? 0 : walls.bottom
       state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
     }
-    else if (state.player.location.y + state.player.size >= walls.top) {
-      // state.player.location.y = walls.top - state.player.size
-      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+    else if (state.player.location.x + state.player.size >= walls.top) {
+      state.player.location.x = useCanvas ? canvas.height - state.player.size : walls.top
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
   }
 
