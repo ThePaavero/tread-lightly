@@ -29,7 +29,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.player.location.y += state.player.velocities.y
 
     // Bounce off of walls, ceiling and floor.
-    bouncePlayer(canvas, true)
+    bouncePlayer()
   }
 
   const anotherArmControlKeyIsDown = (keys: Array<string>, okKey: string): boolean => {
@@ -67,9 +67,9 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         return
       }
 
-      if (anotherArmControlKeyIsDown(keys, key)) {
+      // if (anotherArmControlKeyIsDown(keys, key)) {
         // arm.juttingAmount = 0
-      }
+      // }
 
       const keyToDirectionMap: any = {
         'w': 'UP',
@@ -98,17 +98,6 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
           arm.location.x = player.location.x + player.size
           break
       }
-
-      switch (arm.direction) {
-        case 'UP':
-          break
-        case 'DOWN':
-          break
-        case 'LEFT':
-          break
-        case 'RIGHT':
-          break
-      }
     })
   }
 
@@ -125,27 +114,25 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     loggedLabels.push(label)
   }
 
-  const bouncePlayer = (frame: any, useCanvas: boolean = false): void => {
-    if (useCanvas) {
-      if (state.player.location.x <= 0) {
-        state.player.location.x = 0
-        state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
-      }
-      else if (state.player.location.x + state.player.size >= canvas.width) {
-        state.player.location.x = canvas.width - state.player.size
-        state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
-      }
-
-      if (state.player.location.y <= 0) {
-        state.player.location.y = 0
-        state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
-      }
-      else if (state.player.location.y + state.player.size >= canvas.height) {
-        state.player.location.y = canvas.height - state.player.size
-        state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
-      }
-      return
+  const bouncePlayer = (): void => {
+    if (state.player.location.x <= 0) {
+      state.player.location.x = 0
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
     }
+    else if (state.player.location.x + state.player.size >= canvas.width) {
+      state.player.location.x = canvas.width - state.player.size
+      state.player.velocities.x = (state.player.velocities.x * -1) + (state.player.velocities.x / playerBouncinessDivider)
+    }
+
+    if (state.player.location.y <= 0) {
+      state.player.location.y = 0
+      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+    }
+    else if (state.player.location.y + state.player.size >= canvas.height) {
+      state.player.location.y = canvas.height - state.player.size
+      state.player.velocities.y = (state.player.velocities.y * -1) + (state.player.velocities.y / playerBouncinessDivider)
+    }
+    return
   }
 
   const moveBoxes = (): void => {

@@ -24,7 +24,13 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
     }
     // context.fillStyle = '#99aee6'
     context.fillStyle = 'yellow'
-    context.fillRect(state.player.arm.location.x, state.player.arm.location.y, state.player.arm.size, state.player.arm.size)
+    let length = 0
+    let axis: string = 'x'
+    if (['UP', 'DOWN'].filter((dir: string) => state.player.arm.direction === dir).length) {
+      axis = 'y'
+    }
+
+    context.fillRect(state.player.arm.location.x, state.player.arm.location.y, axis === 'y' ? state.player.arm.size : state.player.arm.juttingAmount, axis === 'x' ? state.player.arm.size : state.player.arm.juttingAmount)
   }
 
   const draw = (): void => {
