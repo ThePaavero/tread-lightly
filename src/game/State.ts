@@ -190,9 +190,13 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       a.location.y + a.size > b.location.y)
   }
 
+  const removeBoxFromArray = (box: Box) => {
+    state.boxes = state.boxes.filter((b: Box) => b !== box)
+  }
+
   const destroyBox = (box: Box): void => {
     // @todo Create an explosion or something.
-    state.boxes = state.boxes.filter((b: Box) => b !== box)
+    removeBoxFromArray(box)
   }
 
   const doOnBoxHit = (box: Box): void => {
@@ -231,7 +235,9 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       logOnce(tipOfArm, 'tip')
       state.boxes.forEach((box: Box) => {
         if (objectsOverlap(box, tipOfArm)) {
-          console.log('ARM HIT')
+          if (box.type === 'good') {
+            removeBoxFromArray(box)
+          }
         }
       })
     }
