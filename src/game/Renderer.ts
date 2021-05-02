@@ -13,9 +13,7 @@ const Renderer = (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D, 
 
   const drawPlayer = (): void => {
     context.fillStyle = '#99aee6'
-    context.beginPath()
-    context.arc(state.player.location.x, state.player.location.y, state.player.size, 0, 2 * Math.PI)
-    context.fill()
+    context.fillRect(state.player.location.x, state.player.location.y, state.player.size, state.player.size)
   }
 
   const draw = (): void => {

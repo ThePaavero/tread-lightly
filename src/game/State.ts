@@ -146,15 +146,25 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     state.player.location.y = canvas.height - (state.player.size + 10)
   }
 
-  const objectsOverlap = (a: Box, b: Box): boolean => { // @note We assume "b" will be the player, but it should match type "Box."
+  const objectsOverlap = (a: Box, b: Box): boolean => {
+    // @note We assume "b" will be the player, but it should match type "Box" for our purposes here.
     return (a.location.x < b.location.x + b.size &&
       a.location.x + a.size > b.location.x &&
       a.location.y < b.location.y + b.size &&
       a.location.y + a.size > b.location.y)
   }
 
+  const destroyBox = (box: Box): void => {
+    // @todo Create an explosion or something.
+    state.boxes = state.boxes.filter((b: Box) => b !== box)
+  }
+
   const doOnBoxHit = (box: Box): void => {
-    // bouncePlayer(box, false)
+    destroyBox(box)
+    const boxClone: any = { ...box }
+    if (boxClone.type === 'bad') {
+      state.player.size += boxClone.damage
+    }
   }
 
   const doHitChecks = (): void => {
