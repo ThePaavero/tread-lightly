@@ -18,11 +18,9 @@ type BoxAmountMinMax = {
   max: number,
 }
 
-type GameState = {
+interface GameState extends GameFrameInitialState {
   timeElapsed: number,
   points: number,
-  running: boolean, // @todo DRY.
-  keysDown: Array<string>, // @todo DRY.
   player: any,
   boxes: Array<Box>,
   boxAmountMinMax: BoxAmountMinMax,
