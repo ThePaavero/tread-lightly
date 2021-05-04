@@ -301,6 +301,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
       x: 0,
       y: 0,
     }
+    state.keysDown = []
     placePlayer()
     generateBoxes(randomIntFromInterval(state.boxAmountMinMax.min, state.boxAmountMinMax.max))
     setTimeout(() => {
