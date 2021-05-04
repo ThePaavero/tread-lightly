@@ -209,8 +209,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     const boxClone: any = { ...box }
     const prop = box.type === 'bad' ? 'damage' : 'points'
     state.player.size += boxClone[prop] * 20
-    if (state.player.size > 150) {
-      gameOver('You got too big')
+    if (state.player.size > 400) {
+      gameOver("You got too big to move around, there's no point.", true)
     }
   }
 
@@ -251,7 +251,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
             arm.juttingAmount = 0
             arm.maxJuttingAmount -= box.damage
             if (arm.maxJuttingAmount < 2) {
-              gameOver('Arm destroyed')
+              gameOver('Arm destroyed', true)
             }
           }
         }
@@ -259,9 +259,12 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
     }
   }
 
-  const gameOver = (message: string) => {
+  const gameOver = (message: string, reload: boolean) => {
     state.running = false
     window.alert(`GAME OVER\n(${message})`)
+    if (reload) {
+      document.location.reload()
+    }
   }
 
   const update = (): void => {
