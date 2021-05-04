@@ -1,6 +1,6 @@
 import boxTypes from './boxTypes'
 
-const randomIntFromInterval = (min: number, max: number): number => { // min and max included 
+const randomIntFromInterval = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -139,7 +139,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const updateBoxes = (): void => {
-    moveBoxes()
+    // We're not moving them at this point.
+    // moveBoxes()
   }
 
   const getSafeBoxLocation = (size: number): BoxLocation => {
@@ -154,7 +155,7 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
   const generateBoxes = (amount: number): void => {
     for (let i = 0; i < amount; i++) {
-      const goodOrBad = randomIntFromInterval(0, 5) === 0 ? 'good' : 'bad'
+      const goodOrBad = randomIntFromInterval(0, 7) === 0 ? 'good' : 'bad'
       const boxType = boxTypes[goodOrBad]
       const size = randomIntFromInterval(20, 70)
       const location = getSafeBoxLocation(size)
@@ -177,6 +178,8 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
 
       state.boxes.push(box)
     }
+
+    // Next time, more boxes!
     state.boxAmountMinMax.min += 4
     state.boxAmountMinMax.max += 4
   }
@@ -246,6 +249,12 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
         if (objectsOverlap(box, tipOfArm)) {
           if (box.type === 'good') {
             removeBoxFromArray(box)
+            // Was this the last "good" box?
+            if (state.boxes.filter((box: Box) => box.type === 'good').length === 0) {
+              state.running = false
+              window.alert('NICE!\n\nPress ok for next level.')
+              init()
+            }
           } else {
             // Punish player by shortening his arm.
             arm.juttingAmount = 0
@@ -274,8 +283,29 @@ const State = (state: GameState, keyIsDown: Function, canvas: HTMLCanvasElement)
   }
 
   const init = (): void => {
+    state.boxes = []
+    state.player.arm = {
+      okToJut: true,
+      currentlyJutting: false,
+      juttingAmount: 0,
+      maxJuttingAmount: 30,
+      direction: null,
+      speed: 1,
+      location: {
+        x: 0,
+        y: 0,
+      },
+      size: 5,
+    }
+    state.player.velocities = {
+      x: 0,
+      y: 0,
+    }
     placePlayer()
-    generateBoxes(randomIntFromInterval(50, 80))
+    generateBoxes(randomIntFromInterval(state.boxAmountMinMax.min, state.boxAmountMinMax.max))
+    setTimeout(() => {
+      state.running = true
+    }, 1000)
   }
 
   init()
